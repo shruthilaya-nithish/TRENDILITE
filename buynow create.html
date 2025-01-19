@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .buy-now-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .buy-now-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-group textarea {
+            resize: none;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="buy-now-container">
+        <h2>Buy Now</h2>
+        <form id="buy-now-form">
+            <div class="form-group">
+                <label for="product-price">Price (Rs.)</label>
+                <input type="text" id="product-price" name="product-price" readonly>
+            </div>
+            <div class="form-group">
+                <label for="user-address">Shipping Address</label>
+                <textarea id="user-address" name="user-address" rows="4" placeholder="Enter your address" required></textarea>
+            </div>
+            <button type="submit" class="btn">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <script>
+        // Populate the price from the URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const price = urlParams.get('price');
+        const priceField = document.getElementById('product-price');
+
+        if (price) {
+            priceField.value = price;
+        }
+
+        // Handle form submission
+        document.getElementById('buy-now-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const address = document.getElementById('user-address').value;
+
+            if (address.trim() === '') {
+                alert('Please enter your address.');
+                return;
+            }
+
+            // Simulate redirection to a payment gateway
+            alert(Proceeding to payment for Rs. ${price}.\nShipping to: ${address});
+            // Redirect to a payment page or process further logic
+        });
+    </script>
+</body>
+</html>

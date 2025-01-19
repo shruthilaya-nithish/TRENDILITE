@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Website</title>
+    <style>
+        /* Existing CSS Code */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            padding: 0;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .cart-button {
+            background-color: #f90;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #f4f4f4;
+        }
+
+        .hero-section h2 {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background-color: #f90;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .products-section {
+            padding: 50px 0;
+            background-color: #fff;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .buy-now-btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .about-section {
+            padding: 50px 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .contact-section {
+            padding: 50px 0;
+            background-color: #fff;
+        }
+
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #contact-form input, #contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #contact-form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>TRENDILITEE  :)</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <!-- Cart Button -->
+            <button class="cart-button" id="add-to-cart-btn">Add to Cart</button>
+        </div>
+    </header>
+
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h2>Welcome to Trendilitee</h2>
+            <p>Your one-stop destination for amazing products.</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="products" class="products-section">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="yam.png" alt="Product 1">
+                    <h3>Yam tone up milk sun cream</h3>
+                    <p>Rs.650</p>
+                    <button class="add-to-cart-btn" data-name="Yam tone up milk sun cream" data-price="650">Add to Cart</button>
+                    <button class="buy-now-btn" data-price="650">Buy Now</button>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="foundation.png" alt="Product 2">
+                    <h3>bobbi brown foundation</h3>
+                    <p>Rs.1120</p>
+                    <button class="add-to-cart-btn" data-name="bobbi brown foundation" data-price="1120">Add to Cart</button>
+                    <button class="buy-now-btn" data-price="1120">Buy Now</button>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="lipstick.png" alt="Product 3">
+                    <h3>lakme crimson red lipstick</h3>
+                    <p>Rs.550</p>
+                    <button class="add-to-cart-btn" data-name="lakme crimson red lipstick" data-price="550">Add to Cart</button>
+                    <button class="buy-now-btn" data-price="550">Buy Now</button>
+                </div>
+                <!-- More Products -->
+                <div class="product-card">
+                    <img src="bvlgari.png" alt="Product 4">
+                    <h3>BVLGARI Blossom Delight Rose Fragranced Perfume</h3>
+                    <p>Rs.2500</p>
+                    <button class="add-to-cart-btn" data-name="BVLGARI Blossom Delight Rose Fragranced Perfume" data-price="2500">Add to Cart</button>
+                    <button class="buy-now-btn" data-price="2500">Buy Now</button>
+                </div>
+                <div class="product-card">
+                    <img src="serum.png" alt="Product 5">
+                    <h3>Nama's skin brightening serum</h3>
+                    <p>Rs.400</p>
+                    <button class="add-to-cart-btn" data-name="Nama's skin brightening serum" data-price="400">Add to Cart</button>
+                    <button class="buy-now-btn" data-price="400">Buy Now</button>
+                </div>
+                <div class="product-card">
+                    <img src="facewash.png" alt="Product 6">
+                    <h3>Dot and Key Moisturizer and facewash</h3>
+                    <p>Rs.750</p>
+                    <button class="add-to-cart-btn" data-name="Dot and Key Moisturizer and facewash" data-price="750">Add to Cart</button>
+                    <button class="buy-now-btn" data-price="750">Buy Now</button>
+                </div>
+                <div class="product-card">
+                    <img src="rosewater.png" alt="Product 7">
+                    <h3>Garnier Rose Water</h3>
+                    <p>Rs.300</p>
+                    <button class="add-to-cart-btn" data-name="Garnier Rose Water" data-price="300">Add to Cart</button>
+                    <button class="buy-now-btn" data-price="300">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We are an online store dedicated to bringing you the best beauty products at the best prices. Browse through our wide range of skincare and makeup products to find your new favorites!</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Trendilitee. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const cartButton = document.getElementById('add-to-cart-btn');
+        let cartContent = [];
+
+        // Handle "Add to Cart" button
+        cartButton.addEventListener('click', () => {
+            alert('Redirecting to cart page...');
+            // Redirect to the cart page
+            window.location.href = 'cart.html'; // Replace with actual path to your cart page
+        });
+
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+        
+        // Add products to cart when "Add to Cart" is clicked
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const name = e.target.getAttribute('data-name');
+                const price = e.target.getAttribute('data-price');
+                cartContent.push({ name, price });
+                alert(`${name} added to cart!`);
+            });
+        });
+
+        // Buy Now functionality
+        const buyNowButtons = document.querySelectorAll('.buy-now-btn');
+        buyNowButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const price = e.target.getAttribute('data-price');
+                alert(`Redirecting to payment for Rs.${price}`);
+                window.location.href = "payment page create.html"; // Replace with actual payment page URL
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - TRENDILITEE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: white;
+            color: black;
+        }
+        header {
+            background: white;
+            color: black;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid black;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        main {
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .payment-form {
+            background: white;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+        .payment-form h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .payment-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .payment-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid black;
+            border-radius: 8px;
+        }
+        .payment-summary {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .button-container {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background: #555;
+            transform: scale(1.1);
+        }
+        footer {
+            background: white;
+            color: black;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 4px solid black;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 600px; /* Increased the width */
+            width: 80%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        .modal h2 {
+            margin-bottom: 20px; /* Added space between text and button */
+        }
+        .modal p {
+            margin-bottom: 30px; /* Increased space between paragraph and button */
+        }
+        .modal button {
+            padding: 12px 25px; /* Increased padding for the button */
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem; /* Slightly bigger button text */
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .modal button:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Payment - TRENDILITEE</h1>
+    </header>
+    <main>
+        <div class="payment-form">
+            <h2>Payment Details</h2>
+            <div class="payment-summary">
+                Total Amount: ₹<span id="totalAmount">1120</span>
+            </div>
+            <form id="paymentForm">
+                <label for="name">Name on Card:</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number" placeholder="123456789012" maxlength="12" required>
+
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="password" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
+
+                <div class="button-container">
+                    <button type="submit">Pay Now</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; All rights reserved.</p>
+    </footer>
+
+    <!-- Modal for Payment Success -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <h2>Payment Successful!</h2>
+            <p>Thank you for your purchase.</p>
+            <button id="closeModalButton">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Fetch the cart from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Calculate the total amount from the cart items
+        const totalAmount = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        
+        // Display the total amount on the payment page
+        document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
+
+        // Handle payment form submission
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const cardNumber = document.getElementById('card-number').value;
+            const expiryDate = document.getElementById('expiry-date').value;
+            const cvv = document.getElementById('cvv').value;
+
+            // Validate card number
+            if (!/^\d{12}$/.test(cardNumber)) {
+                alert('Card number must be 12 digits.');
+                return;
+            }
+
+            // Validate expiry date
+            const [month, year] = expiryDate.split('/');
+            if (!month || !year || isNaN(month) || isNaN(year) || month < 1 || month > 12) {
+                alert('Invalid expiry date. Ensure the format is MM/YY and month is between 1 and 12.');
+                return;
+            }
+
+            // Validate CVV
+            if (!/^\d{3}$/.test(cvv)) {
+                alert('CVV must be exactly 3 digits.');
+                return;
+            }
+
+            // Show success modal with animation
+            const modal = document.getElementById('paymentModal');
+            modal.classList.add('show'); // Show modal with transition
+
+            // Close modal and redirect after 3 seconds
+            document.getElementById('closeModalButton').addEventListener('click', function() {
+                localStorage.removeItem('cart');  // Clear cart
+                window.location.href = "home.html";  // Redirect to homepage
+            });
+        });
+    </script>
+</body>
+</html>
